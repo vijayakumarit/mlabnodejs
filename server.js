@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 // create express app
 const app = express();
 
+//Import models
+User = require("./models/users");
+
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -28,6 +31,25 @@ mongoose.connect(dbConfig.url, {
 // define a simple route
 app.get('/', (req, res) => {
     res.json({"message": "hello"});
+});
+
+app.get('/getUser', (req, res) => {
+    User.getUsers(function(err, data){
+
+		if(err){
+			throw err;
+		}
+		res.json(data);
+	});
+});
+app.post('/addUser', (req, res) => {
+    User.addUser(req.body, function(err, data){
+		if(err)
+		{
+			throw err;
+		}
+		res.json(data);
+	})
 });
 
 // listen for requests
