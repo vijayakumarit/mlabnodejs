@@ -16,15 +16,7 @@ var userSchema = mongoose.Schema({
 		type : String,
 		required : true
 	},
-	age:{
-		type : Number
-	},
-	email:{
-		type: String
-	},
-	image_url:{
-		type : String
-	},
+	
 	created_date:{
 		type : Date,
 		default : Date.now
@@ -56,4 +48,14 @@ module.exports.addUser = function(user, callback){
 	User.create(user, callback);
 }
 
+//update user
 
+module.exports.updateUsers = (id, user, options, callback) => {
+	var query = {_id: id};
+	var update = {
+		title: user.title,
+		gender: user.gender,
+		name : user.name
+	}
+	User.findOneAndUpdate(query, update, options, callback);
+}
