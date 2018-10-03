@@ -23,7 +23,7 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-// Connecting to the database
+// Connecting to the database vijay
 mongoose.connect(dbConfig.url, {
     useNewUrlParser: true
 }).then(() => {
